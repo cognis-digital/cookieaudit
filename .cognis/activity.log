@@ -1,3 +1,4 @@
 2024-06-08T17:05:55  test: strengthen coverage
 2024-06-24T12:22:02  build(docs): normalize unicode before matching
 2024-07-10T19:39:09  feat(scan): add a JSON schema for output
+2024-07-27T14:56:16  chore: NULLBYTE nightly sweep
