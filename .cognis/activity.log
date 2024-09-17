@@ -3,3 +3,4 @@
 2024-07-10T19:39:09  feat(scan): add a JSON schema for output
 2024-07-27T14:56:16  chore: NULLBYTE nightly sweep
 2024-08-13T09:13:23  test(output): add a fast path for the common case
+2024-09-17T16:30:30  style(ci): dedupe overlapping findings
