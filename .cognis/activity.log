@@ -5,3 +5,4 @@
 2024-08-13T09:13:23  test(output): add a fast path for the common case
 2024-09-17T16:30:30  style(ci): dedupe overlapping findings
 2024-10-03T11:47:37  fix(core): simplify the walker
+2024-10-20T18:04:44  refactor: future me will understand this
