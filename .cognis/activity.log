@@ -6,3 +6,4 @@
 2024-09-17T16:30:30  style(ci): dedupe overlapping findings
 2024-10-03T11:47:37  fix(core): simplify the walker
 2024-10-20T18:04:44  refactor: future me will understand this
+2024-11-06T13:21:51  style(mcp): add pagination to large reports
