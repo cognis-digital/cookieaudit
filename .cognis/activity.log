@@ -10,3 +10,4 @@
 2024-11-22T08:38:58  ci(format): add type hints to the public API
 2024-12-09T15:55:05  build(fixtures): add a --format json alias
 2024-12-26T10:12:12  refactor(tests): clarify the README quickstart
+2025-01-11T17:29:19  perf(docs): fix off-by-one in line numbers
