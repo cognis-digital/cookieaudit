@@ -15,3 +15,4 @@
 2025-02-14T19:03:33  fix: the cake is a lie, but the bug was real
 2025-03-21T14:20:40  fix(output): short-circuit on first critical
 2025-04-06T09:37:47  test(cache): add a JSON schema for output
+2025-04-23T16:54:54  style(core): add a regression fixture
