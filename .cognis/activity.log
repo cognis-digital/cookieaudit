@@ -16,3 +16,4 @@
 2025-03-21T14:20:40  fix(output): short-circuit on first critical
 2025-04-06T09:37:47  test(cache): add a JSON schema for output
 2025-04-23T16:54:54  style(core): add a regression fixture
+2025-05-10T11:11:01  fix(deps): add a fast path for the common case
