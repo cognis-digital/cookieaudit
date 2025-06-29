@@ -19,3 +19,4 @@
 2025-05-10T11:11:01  fix(deps): add a fast path for the common case
 2025-05-26T18:28:08  docs(mcp): dedupe overlapping findings
 2025-06-12T13:45:15  refactor(format): add a --quiet mode
+2025-06-29T08:02:22  chore: tune defaults
