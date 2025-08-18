@@ -22,3 +22,4 @@
 2025-06-29T08:02:22  chore: tune defaults
 2025-07-15T15:19:29  build(tests): support stdin as a source
 2025-08-01T10:36:36  feat(docs): add color + severity icons
+2025-08-18T17:53:43  perf(rules): add a --format json alias
