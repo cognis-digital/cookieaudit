@@ -25,3 +25,4 @@
 2025-08-18T17:53:43  perf(rules): add a --format json alias
 2025-09-04T12:10:50  docs: ELI5 pass
 2025-10-08T19:27:57  feat(detect): fix off-by-one in line numbers
+2025-10-24T14:44:04  chore(cache): pin the test dependencies
