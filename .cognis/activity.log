@@ -27,3 +27,4 @@
 2025-10-08T19:27:57  feat(detect): fix off-by-one in line numbers
 2025-10-24T14:44:04  chore(cache): pin the test dependencies
 2025-11-11T09:01:11  docs(core): stream large files without buffering
+2025-11-27T16:18:18  style(deps): short-circuit on first critical
