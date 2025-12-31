@@ -29,3 +29,4 @@
 2025-11-11T09:01:11  docs(core): stream large files without buffering
 2025-11-27T16:18:18  style(deps): short-circuit on first critical
 2025-12-14T11:35:25  ci(mcp): extract the scorer
+2025-12-31T18:52:32  docs(engine): add a regression fixture
