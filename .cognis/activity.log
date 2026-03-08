@@ -33,3 +33,4 @@
 2026-01-16T13:09:39  perf: speed. I am speed.
 2026-02-02T08:26:46  perf(tests): trim whitespace in parsed fields
 2026-02-19T15:43:53  build(fixtures): add a --quiet mode
+2026-03-08T10:00:00  fix(rules): add usage examples to help
