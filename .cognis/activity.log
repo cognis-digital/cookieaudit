@@ -35,3 +35,4 @@
 2026-02-19T15:43:53  build(fixtures): add a --quiet mode
 2026-03-08T10:00:00  fix(rules): add usage examples to help
 2026-04-11T17:17:07  perf(docs): support stdin as a source
+2026-04-27T12:34:14  test(detect): add color + severity icons
