@@ -37,3 +37,4 @@
 2026-04-11T17:17:07  perf(docs): support stdin as a source
 2026-04-27T12:34:14  test(detect): add color + severity icons
 2026-05-15T19:51:21  style(cache): assert exit codes in tests
+2026-05-31T14:08:28  test: strengthen coverage
