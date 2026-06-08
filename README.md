@@ -36,9 +36,13 @@ Audit Set-Cookie flags (Secure/HttpOnly/SameSite) from a response dump — witho
 <a name="features"></a>
 ## Features
 
-- ✅ Todo
-- ✅ Fixme
-- ✅ Xxx
+- ✅ Parse Set Cookie
+- ✅ Parse Dump
+- ✅ Audit Cookie
+- ✅ Audit Dump
+- ✅ Render Table
+- ✅ Render Json
+- ✅ Render Html
 - ✅ Runs on Linux/macOS/Windows · Docker · devcontainer
 - ✅ Ports in Python, JavaScript, Go, and Rust (`ports/`)
 
