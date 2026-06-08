@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+Date: Mon, 08 Jun 2026 12:00:00 GMT
+Content-Type: text/html; charset=utf-8
+Server: nginx
+Set-Cookie: __Host-session=eyJ1aWQiOjQyfQ; Path=/; HttpOnly; SameSite=Strict
+Set-Cookie: auth_token=abc123def456; Path=/; Domain=.example.com; Secure; Max-Age=7776000
+Set-Cookie: tracking=9f8e7d6c; Path=/; SameSite=None
+Set-Cookie: theme=dark; Path=/; Secure; HttpOnly; SameSite=Lax
+Content-Length: 0
+

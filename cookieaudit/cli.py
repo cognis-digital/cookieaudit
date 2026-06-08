@@ -1,38 +1,86 @@
-"""COOKIEAUDIT command-line interface."""
+"""Command-line interface for COOKIEAUDIT."""
 from __future__ import annotations
-import argparse, sys
-from cookieaudit.core import scan, to_json, TOOL_NAME, TOOL_VERSION
 
-def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(prog="cookieaudit", description="COOKIEAUDIT — Cognis Neural Suite")
-    ap.add_argument("--version", action="version", version=f"{TOOL_NAME} {TOOL_VERSION}")
-    sub = ap.add_subparsers(dest="cmd")
-    s = sub.add_parser("scan", help="scan a file or directory")
-    s.add_argument("target")
-    s.add_argument("--format", choices=["table", "json"], default="table")
-    s.add_argument("--fail-on", choices=["critical", "high", "medium", "low"], default=None)
-    sub.add_parser("mcp", help="run as an MCP server")
-    args = ap.parse_args(argv)
+import argparse
+import sys
+from typing import List, Optional
 
-    if args.cmd == "mcp":
-        from cookieaudit.mcp_server import serve
-        return serve()
-    if args.cmd == "scan":
-        res = scan(args.target)
-        if args.format == "json":
-            print(to_json(res))
-        else:
-            if not res.findings:
-                print(f"[{TOOL_NAME}] no findings in {args.target}")
-            for f in res.findings:
-                print(f"  [{f.severity.upper():8}] {f.id}  {f.title}  ({f.where})")
-            print(f"\n{len(res.findings)} findings · risk score {res.score} · {res.elapsed_ms}ms")
-        order = {"critical": 4, "high": 3, "medium": 2, "low": 1}
-        if args.fail_on and any(order.get(f.severity, 0) >= order[args.fail_on] for f in res.findings):
+from . import TOOL_NAME, TOOL_VERSION
+from .core import audit_dump, render_table, render_json, render_html
+
+
+def _read_input(path: str) -> str:
+    if path == "-":
+        return sys.stdin.read()
+    with open(path, "r", encoding="utf-8", errors="replace") as fh:
+        return fh.read()
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog=TOOL_NAME,
+        description="Audit Set-Cookie security flags from an HTTP response dump.",
+    )
+    parser.add_argument(
+        "--version", action="version", version=f"{TOOL_NAME} {TOOL_VERSION}"
+    )
+    sub = parser.add_subparsers(dest="command")
+
+    audit = sub.add_parser(
+        "audit", help="Audit cookies from a response dump file (or - for stdin)."
+    )
+    audit.add_argument(
+        "input", nargs="?", default="-",
+        help="Path to response dump, or '-' for stdin (default).",
+    )
+    audit.add_argument(
+        "--format", choices=["table", "json", "html"], default="table",
+        help="Output format (default: table). 'html' writes a shareable report.",
+    )
+    audit.add_argument(
+        "-o", "--output", default=None,
+        help="Write report to this file instead of stdout.",
+    )
+    return parser
+
+
+def main(argv: Optional[List[str]] = None) -> int:
+    parser = build_parser()
+    args = parser.parse_args(argv)
+
+    if args.command != "audit":
+        parser.print_help()
+        return 2
+
+    try:
+        text = _read_input(args.input)
+    except OSError as exc:
+        print(f"error: cannot read input: {exc}", file=sys.stderr)
+        return 2
+
+    report = audit_dump(text)
+
+    if args.format == "json":
+        out = render_json(report)
+    elif args.format == "html":
+        out = render_html(report)
+    else:
+        out = render_table(report)
+
+    if args.output:
+        try:
+            with open(args.output, "w", encoding="utf-8") as fh:
+                fh.write(out)
+        except OSError as exc:
+            print(f"error: cannot write output: {exc}", file=sys.stderr)
             return 2
-        return 0
-    ap.print_help()
-    return 0
+        print(f"wrote {args.format} report to {args.output}", file=sys.stderr)
+    else:
+        print(out)
+
+    # Non-zero exit when medium+ findings exist, so this works in CI/pipelines.
+    return 1 if report.failed else 0
+
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())
