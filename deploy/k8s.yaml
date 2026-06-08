@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: cookieaudit, labels: { app: cookieaudit } }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: cookieaudit } }
+  template:
+    metadata: { labels: { app: cookieaudit } }
+    spec:
+      containers:
+        - name: cookieaudit
+          image: ghcr.io/cognis-digital/cookieaudit:latest
+          ports: [{ containerPort: 8000 }]
+          resources:
+            requests: { cpu: "50m", memory: "64Mi" }
+            limits: { cpu: "500m", memory: "256Mi" }
+---
+apiVersion: v1
+kind: Service
+metadata: { name: cookieaudit }
+spec:
+  selector: { app: cookieaudit }
+  ports: [{ port: 80, targetPort: 8000 }]
