@@ -8,7 +8,7 @@ from __future__ import annotations
 import html as _html
 import re
 from dataclasses import dataclass, field
-from typing import Iterable, List, Optional
+from typing import List, Optional
 
 # Severity ranking (higher index = worse) used for sorting and exit codes.
 SEVERITY_ORDER = ["info", "low", "medium", "high"]

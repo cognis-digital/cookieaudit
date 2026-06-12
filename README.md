@@ -16,7 +16,7 @@
 </div>
 
 ```bash
-pip install cognis-cookieaudit
+pip install "git+https://github.com/cognis-digital/cookieaudit.git"
 cookieaudit scan .            # → prioritized findings in seconds
 ```
 
@@ -52,7 +52,7 @@ Audit Set-Cookie flags (Secure/HttpOnly/SameSite) from a response dump — witho
 ## Quick start
 
 ```bash
-pip install cognis-cookieaudit
+pip install "git+https://github.com/cognis-digital/cookieaudit.git"
 cookieaudit --version
 cookieaudit scan .                       # scan current project
 cookieaudit scan . --format json         # machine-readable
