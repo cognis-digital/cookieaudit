@@ -20,6 +20,12 @@ pip install "git+https://github.com/cognis-digital/cookieaudit.git"
 cookieaudit scan .            # → prioritized findings in seconds
 ```
 
+<!-- cognis:layman:start -->
+## What is this?
+
+cookieaudit reads HTTP response files and checks whether each cookie is configured securely — specifically whether it has the Secure, HttpOnly, and SameSite flags that protect users from session hijacking and cross-site attacks. You paste in or pipe a raw HTTP response, and it tells you exactly which cookies are missing protections and how to fix them. It works offline with no accounts or servers required, outputs results as a table, JSON, or an HTML report, and can be used as a CI gate that blocks a build when risky cookie settings are found. It is useful for web developers and security testers who want a fast, scriptable way to verify cookie hardening before shipping.
+<!-- cognis:layman:end -->
+
 ## Contents
 
 - [Why cookieaudit?](#why) · [Features](#features) · [Quick start](#quick-start) · [Example](#example) · [Architecture](#architecture) · [AI stack](#ai-stack) · [How it compares](#how-it-compares) · [Integrations](#integrations) · [Install anywhere](#install-anywhere) · [Related](#related) · [Contributing](#contributing)
@@ -49,6 +55,42 @@ Audit Set-Cookie flags (Secure/HttpOnly/SameSite) from a response dump — witho
 <div align="right"><a href="#top">↑ back to top</a></div>
 
 <a name="quick-start"></a>
+<!-- cognis:install:start -->
+## Install
+
+`cookieaudit` is source-available (not published to PyPI) — every method below installs
+straight from GitHub. Pick whichever you prefer; the one-line scripts auto-detect
+the best tool available on your machine.
+
+**One-liner (Linux / macOS):**
+```sh
+curl -fsSL https://raw.githubusercontent.com/cognis-digital/cookieaudit/HEAD/install.sh | sh
+```
+
+**One-liner (Windows PowerShell):**
+```powershell
+irm https://raw.githubusercontent.com/cognis-digital/cookieaudit/HEAD/install.ps1 | iex
+```
+
+**Or install manually — any one of:**
+```sh
+pipx install "git+https://github.com/cognis-digital/cookieaudit.git"     # isolated (recommended)
+uv tool install "git+https://github.com/cognis-digital/cookieaudit.git"  # uv
+pip install "git+https://github.com/cognis-digital/cookieaudit.git"      # pip
+```
+
+**From source:**
+```sh
+git clone https://github.com/cognis-digital/cookieaudit.git
+cd cookieaudit && pip install .
+```
+
+Then run:
+```sh
+cookieaudit --help
+```
+<!-- cognis:install:end -->
+
 ## Quick start
 
 ```bash
