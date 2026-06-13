@@ -20,6 +20,43 @@ pip install cognis-cookieaudit
 cookieaudit scan .            # → prioritized findings in seconds
 ```
 
+## Usage — step by step
+
+1. **Install** (editable from a clone, or from the repo):
+
+   ```bash
+   pip install -e .
+   ```
+
+2. **Audit a captured HTTP response dump** (the `audit` subcommand reads a file, or `-` for stdin). Capture the response headers however you like, then pipe them in:
+
+   ```bash
+   curl -sD - https://example.com -o /dev/null | cookieaudit audit -
+   ```
+
+   Or point it at a saved dump:
+
+   ```bash
+   cookieaudit audit response.txt
+   ```
+
+3. **Get machine-readable output** with `--format json`, or write a shareable HTML report with `--format html -o`:
+
+   ```bash
+   cookieaudit audit response.txt --format json
+   cookieaudit audit response.txt --format html -o cookie-report.html
+   ```
+
+4. **Read the result.** The table lists each `Set-Cookie` and its missing/weak security flags (`Secure`, `HttpOnly`, `SameSite`, etc.). The process exits **non-zero (1)** when any medium-or-higher finding exists, so you can gate on it.
+
+5. **Use it in CI** — fail the build when insecure cookies ship:
+
+   ```bash
+   curl -sD - "$TARGET_URL" -o /dev/null | cookieaudit audit - --format json || {
+     echo "Insecure cookie flags detected"; exit 1; }
+   ```
+
+
 ## Contents
 
 - [Why cookieaudit?](#why) · [Features](#features) · [Quick start](#quick-start) · [Example](#example) · [Architecture](#architecture) · [AI stack](#ai-stack) · [How it compares](#how-it-compares) · [Integrations](#integrations) · [Install anywhere](#install-anywhere) · [Related](#related) · [Contributing](#contributing)
