@@ -32,3 +32,14 @@ cookieaudit = "cookieaudit.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["cookieaudit"]
+
+[tool.ruff]
+# HTML template strings and long cookie-spec messages push past 88 chars.
+line-length = 120
+
+[tool.ruff.lint]
+select = ["F", "E"]
+ignore = [
+    # Long lines inside HTML string literals are intentional.
+    "E501",
+]

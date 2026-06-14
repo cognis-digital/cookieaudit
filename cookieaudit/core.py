@@ -10,6 +10,9 @@ import re
 from dataclasses import dataclass, field
 from typing import List, Optional
 
+TOOL_NAME = "cookieaudit"
+TOOL_VERSION = "0.6.5"
+
 # Severity ranking (higher index = worse) used for sorting and exit codes.
 SEVERITY_ORDER = ["info", "low", "medium", "high"]
 
@@ -280,12 +283,20 @@ def audit_cookie(cookie: Cookie) -> List[Finding]:
 
 
 def audit_dump(text: str) -> AuditReport:
+    if text is None:
+        raise ValueError("audit_dump: text must be a str, got None")
+    if not isinstance(text, str):
+        raise TypeError(f"audit_dump: text must be a str, got {type(text).__name__}")
     cookies = parse_dump(text)
     findings: List[Finding] = []
     for c in cookies:
         findings.extend(audit_cookie(c))
     findings.sort(
-        key=lambda f: (-SEVERITY_ORDER.index(f.severity), f.cookie, f.code)
+        key=lambda f: (
+            -SEVERITY_ORDER.index(f.severity) if f.severity in SEVERITY_ORDER else 0,
+            f.cookie,
+            f.code,
+        )
     )
     return AuditReport(findings=findings, cookies=cookies)
 
