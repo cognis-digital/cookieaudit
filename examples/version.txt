@@ -1,0 +1,3 @@
+$ cookieaudit-emit --version
+
+cookieaudit 0.1.0

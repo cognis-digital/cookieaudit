@@ -20,6 +20,61 @@ pip install cognis-cookieaudit
 cookieaudit scan .            # → prioritized findings in seconds
 ```
 
+
+<!-- cognis:example:start -->
+## 🔎 Example output
+
+Real, reproducible output from the tool — runs offline:
+
+```console
+$ cookieaudit-emit --version
+cookieaudit 0.1.0
+```
+
+```console
+$ cookieaudit-emit --help
+usage: cookieaudit [-h] [--version] {audit} ...
+
+Audit Set-Cookie security flags from an HTTP response dump.
+
+positional arguments:
+  {audit}
+    audit     Audit cookies from a response dump file (or - for stdin).
+
+options:
+  -h, --help  show this help message and exit
+  --version   show program's version number and exit
+```
+
+> Blocks above are real `cookieaudit` output — reproduce them from a clone.
+
+**Sample result format** _(illustrative values — run on your own data for real findings):_
+
+```
+{
+"cookieaudit": {
+"findings": [
+{
+"id": "1",
+"category": "network",
+"name": "Cookie Audit Finding 1",
+"description": "A suspicious cookie was detected.",
+"severity": "medium"
+},
+{
+"id": "2",
+"category": "network",
+"name": "Cookie Audit Finding 2",
+"description": "Another suspicious cookie was detected.",
+"severity": "high"
+}
+]
+}
+}
+```
+
+<!-- cognis:example:end -->
+
 ## Usage — step by step
 
 1. **Install** (editable from a clone, or from the repo):
